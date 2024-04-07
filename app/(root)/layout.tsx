@@ -1,3 +1,5 @@
+import NavBar from "@/components/global/navBar";
+import SideBar from "@/components/global/sideBar";
 import React from "react";
 
 type Props = {
@@ -7,9 +9,9 @@ type Props = {
 const layout = (props: Props) => {
   return (
     <main>
-      NavBar
+      <NavBar />
       <div className="flex">
-        SideBar
+        <SideBar />
         <section className="flex flex-1 flex-col min-h-full px-6 pb-6 pt-28 max-md:pb-14 sm:px-14">
           <div className="w-full">{props.children}</div>
         </section>
