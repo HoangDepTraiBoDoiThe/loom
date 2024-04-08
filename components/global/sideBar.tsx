@@ -14,7 +14,7 @@ const SideBar = (props: Props) => {
 
   return (
     <div>
-      <section className="sticky left-0 top-0 flex flex-col justify-between p-6 pt-26 text-white h-screen w-fit bg-dark-1 max-md:hidden lg:w-[264px]">
+      <section className="sticky left-0 top-0 flex flex-col justify-between p-6 pt-28 text-white h-screen w-fit bg-dark-1 max-md:hidden lg:w-[264px]">
         <div className="flex flex-col flex-1 gap-6">
           {sideBarLinks.map((link, index) => {
             const isActive =

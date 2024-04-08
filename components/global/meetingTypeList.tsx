@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import HomeCard from "./homeCard";
 import { useRouter } from "next/navigation";
+import ModalMeeting from "./modalMeeting";
 
 type Props = {};
 
@@ -41,6 +42,13 @@ const MeetingTypeList = (props: Props) => {
         icon="/icons/recordings.svg"
         className="bg-yellow-1"
         onClick={() => router.push("/recordings")}
+      />
+      <ModalMeeting
+        title="Create a new meeting"
+        description="Start a new meeting with your team."
+        isOpen={meetingState === "isInstantMeeting"}
+        handleClick={createMeeting}
+        onClose={() => setMeetingState(undefined)}
       />
     </section>
   );

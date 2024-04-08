@@ -19,7 +19,7 @@ const page = (props: Props) => {
   return (
     <section className="flex flex-col gap-10 text-white">
       <div className="bg-hero w-full h-[300px] rounded-lg bg-cover">
-        <div className="flex h-full flex-col justify-between max-md:px-5 max-md:py-8 lg:p-11">
+        <div className="flex h-full flex-col justify-between px-5 py-8">
           <h2 className="backdrop-blur-sm py-1 max-w-[270px] bg-slate-600 rounded-sm text-center text-base font-normal">
             Upcoming meeting at 12:30 PM
           </h2>
