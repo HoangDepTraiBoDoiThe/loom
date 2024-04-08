@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import MobileNav from "./mobileNav";
+import { UserButton } from "@clerk/nextjs";
 
 type Props = {};
 
@@ -20,7 +21,10 @@ const NavBar = (props: Props) => {
           Loom
         </p>
       </Link>
-      <MobileNav />
+      <div className="flex gap-5">
+        <UserButton />
+        <MobileNav />
+      </div>
     </nav>
   );
 };
