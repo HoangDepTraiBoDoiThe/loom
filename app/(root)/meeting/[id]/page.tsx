@@ -16,9 +16,7 @@ const Page = (props: Props) => {
   return (
     <main className="h-screen w-full">
       <StreamCall>
-        <StreamTheme>
-          {isSetupMeetingRoom ? <MeetingRoom /> : <MeetingSetup />}
-        </StreamTheme>
+        <StreamTheme>{isSetupMeetingRoom ? <MeetingSetup /> : ""}</StreamTheme>
       </StreamCall>
     </main>
   );
