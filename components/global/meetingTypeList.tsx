@@ -6,11 +6,13 @@ import { useRouter } from "next/navigation";
 import ModalMeeting from "./modalMeeting";
 import { useStreamVideoClient } from "@stream-io/video-react-sdk";
 import { useUser } from "@clerk/nextjs";
+import { useToast } from "../ui/use-toast";
 
 type Props = {};
 
 const MeetingTypeList = (props: Props) => {
   const router = useRouter();
+  const { toast } = useToast();
   const [meetingState, setMeetingState] = useState<
     "isScheduleMeeting" | "isJoiningMeeting" | "isInstantMeeting" | undefined
   >();
@@ -22,6 +24,11 @@ const MeetingTypeList = (props: Props) => {
   const { isLoaded, user } = useUser();
 
   const createMeeting = async () => {
+    if (values?.startAt) {
+      toast({
+        title: "Please select a valid date and time",
+      });
+    }
     if (!user || !client) return;
     const start = values?.startAt || new Date().toISOString();
     const desc = values?.description || "Instant meeting";
@@ -37,8 +44,15 @@ const MeetingTypeList = (props: Props) => {
       });
 
       if (!values?.description) router.push(`/meeting/${call?.id}`);
+      toast({
+        title: "Created a new meeting",
+      });
     } catch (error) {
       console.log("createMeeting: ", error);
+      toast({
+        variant: "destructive",
+        title: "Failed to create meeting",
+      });
     }
   };
 
