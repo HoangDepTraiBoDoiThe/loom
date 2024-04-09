@@ -4,6 +4,8 @@ import React, { useState } from "react";
 import HomeCard from "./homeCard";
 import { useRouter } from "next/navigation";
 import ModalMeeting from "./modalMeeting";
+import { useStreamVideoClient } from "@stream-io/video-react-sdk";
+import { useUser } from "@clerk/nextjs";
 
 type Props = {};
 
@@ -12,8 +14,34 @@ const MeetingTypeList = (props: Props) => {
   const [meetingState, setMeetingState] = useState<
     "isScheduleMeeting" | "isJoiningMeeting" | "isInstantMeeting" | undefined
   >();
+  const [values, setValues] = useState<{
+    startAt: string;
+    description: string;
+  }>();
+  const client = useStreamVideoClient();
+  const { isLoaded, user } = useUser();
 
-  const createMeeting = () => {};
+  const createMeeting = async () => {
+    if (!user || !client) return;
+    const start = values?.startAt || new Date().toISOString();
+    const desc = values?.description || "Instant meeting";
+    try {
+      const call = client?.call("default", crypto.randomUUID());
+      call?.create({
+        data: {
+          starts_at: start,
+          custom: {
+            description: desc,
+          },
+        },
+      });
+      call?.getOrCreate({ data: { custom: {} } });
+
+      if (!desc) router.push(`/meeting/${call?.id}`);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <section className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-4">
