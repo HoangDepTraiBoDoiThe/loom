@@ -13,8 +13,9 @@ export const tokenProvider = async () => {
   if (!apiSecret) throw Error("API Secret not found");
 
   const client = new StreamClient(apiKey, apiSecret);
-  const exp = Math.round(new Date().getTime() / 1000) + 60 * 60;
-  const token = client.createToken(user.id, exp);
+  const expirationTime = Math.floor(Date.now() / 1000) + 3600; // optional. defaults to 1 hour
+  const issuedAt = Math.floor(Date.now() / 1000) - 60;
+  const token = client.createToken(user.id, expirationTime, issuedAt);
 
   return token;
 };

@@ -27,7 +27,7 @@ const MeetingTypeList = (props: Props) => {
     const desc = values?.description || "Instant meeting";
     try {
       const call = client?.call("default", crypto.randomUUID());
-      call?.create({
+      call.getOrCreate({
         data: {
           starts_at: start,
           custom: {
@@ -35,11 +35,10 @@ const MeetingTypeList = (props: Props) => {
           },
         },
       });
-      call?.getOrCreate({ data: { custom: {} } });
 
-      if (!desc) router.push(`/meeting/${call?.id}`);
+      if (!values?.description) router.push(`/meeting/${call?.id}`);
     } catch (error) {
-      console.log(error);
+      console.log("createMeeting: ", error);
     }
   };
 
