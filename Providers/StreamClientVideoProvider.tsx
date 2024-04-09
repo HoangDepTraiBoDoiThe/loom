@@ -11,7 +11,7 @@ interface Props {
   children: React.ReactNode;
 }
 
-const StreamClientProvider = ({ children }: Props) => {
+const StreamClientVideoProvider = ({ children }: Props) => {
   const [videoClient, setVideoClient] = useState<StreamVideoClient>();
   const { isLoaded, user } = useUser();
 
@@ -19,7 +19,7 @@ const StreamClientProvider = ({ children }: Props) => {
     if (!isLoaded || !user) return;
     if (!apiKey) throw Error("apiKey is invalid");
     try {
-      const client = new StreamVideoClient({
+      const streamVideoClient = new StreamVideoClient({
         apiKey,
         user: {
           id: user?.id,
@@ -28,14 +28,15 @@ const StreamClientProvider = ({ children }: Props) => {
         },
         tokenProvider,
       });
-      setVideoClient(client);
+      setVideoClient(streamVideoClient);
     } catch (error) {
       console.log(error);
     }
   }, [isLoaded, user]);
 
   if (!videoClient) return <Loader />;
+
   return <StreamVideo client={videoClient}>{children}</StreamVideo>;
 };
 
-export default StreamClientProvider;
+export default StreamClientVideoProvider;
