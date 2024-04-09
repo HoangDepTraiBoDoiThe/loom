@@ -1,4 +1,4 @@
-import StreamClientProvider from "@/Providers/StreamClientProvider";
+import StreamClientVideoProvider from "@/Providers/StreamClientVideoProvider";
 import MeetingTypeList from "@/components/global/meetingTypeList";
 import React from "react";
 
@@ -18,7 +18,7 @@ const page = (props: Props) => {
   });
 
   return (
-    <StreamClientProvider>
+    <StreamClientVideoProvider>
       <section className="flex flex-col gap-10 text-white">
         <div className="bg-hero w-full h-[300px] rounded-lg bg-cover">
           <div className="flex h-full flex-col justify-between px-5 py-8">
@@ -35,7 +35,7 @@ const page = (props: Props) => {
         </div>
         <MeetingTypeList />
       </section>
-    </StreamClientProvider>
+    </StreamClientVideoProvider>
   );
 };
 
